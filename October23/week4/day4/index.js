@@ -1,2 +1,6 @@
-require('./batman')
-require('./superman')
+const superHero=require('./super_hero')
+console.log(superHero.getname())
+superHero.setname("Iron man")
+console.log(superHero.getname())
+const newsuperhero = require('./super_hero')
+console.log(newsuperhero.getname())
