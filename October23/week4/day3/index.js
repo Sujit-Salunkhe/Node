@@ -1,2 +1,5 @@
+const add = require('./add.js')
 console.log('hello from index.js')
-console.log('sujit')
+// console.log('sujit')
+const sum=add(9,3)
+console.log(sum)
