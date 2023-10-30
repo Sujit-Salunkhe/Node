@@ -2,15 +2,22 @@
 // const { read } = require("node:fs")
 
 const fs = require("node:fs")
+const zlib=require("node:zlib")
+const gzip =zlib.createGzip()
+
 const readableStream = fs.createReadStream('./file.txt',{
     encoding : "utf-8",
     highWaterMark  : 2  
 })
-readableStream.on("data",(chunk) => {
-    console.log(chunk)
-    writebleStream.write(chunk)
-})
+readableStream.pipe(gzip).pipe(fs.WriteStream("./file2.txt.gz"))
+// readableStream.on("data",(chunk) => {
+//     console.log(chunk)
+//     writebleStream.write(chunk)
+// })
 const writebleStream = fs.WriteStream('./file2.txt')
+
+readableStream.pipe(writebleStream) 
+
 // async function readFile () {
 //     try{
 //         const data = await fs.readFile("file.txt","utf-8")
