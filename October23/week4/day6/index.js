@@ -6,7 +6,7 @@ pizzShop.on('order', (size,topping) => {
     console.log(`ordered receive baking a ${size} pizza with ${topping}`)
     drinkMachine.servedrink(size)
 })
-pizzShop.order("large","chessy");
+pizzShop.orde("large","chessy");
 pizzShop.displyordernumber ();
 // const EventEmitter = require("node:events")
 // const emitter = new EventEmitter()

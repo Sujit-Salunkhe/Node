@@ -4,7 +4,7 @@ class pizzShop extends EventEmitter {
         super();
         this.ordernumber = 0;
     }
-    order(size,topping) {
+    orde(size,topping) {
         this.ordernumber++;
         this.emit("order",size,topping)
     }

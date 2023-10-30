@@ -1,15 +1,25 @@
 // const { error } = require("node:console")
-const { read } = require("node:fs")
-const fs = require("node:fs/promises")
-async function readFile () {
-    try{
-        const data = await fs.readFile("file.txt","utf-8")
-        console.log(data)
-    }catch(err) {
-        console.log(err)
-    }
-}
-readFile()
+// const { read } = require("node:fs")
+
+const fs = require("node:fs")
+const readableStream = fs.createReadStream('./file.txt',{
+    encoding : "utf-8",
+    highWaterMark  : 2  
+})
+readableStream.on("data",(chunk) => {
+    console.log(chunk)
+    writebleStream.write(chunk)
+})
+const writebleStream = fs.WriteStream('./file2.txt')
+// async function readFile () {
+//     try{
+//         const data = await fs.readFile("file.txt","utf-8")
+//         console.log(data)
+//     }catch(err) {
+//         console.log(err)
+//     }
+// }
+// readFile()
 
 // console.log("first");
 // fs.readFile("file.txt","utf-8")
