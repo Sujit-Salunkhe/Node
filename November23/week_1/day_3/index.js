@@ -6,13 +6,13 @@ const createserver = http.createServer((req,res) =>{
     //     firstName : "sujit",
     //     lastName : "salunkhe"
     // }
-    const name= "sujit";
-    res.writeHead(200,{"Content-Type" : "text/html"})
+    // const name= "sujit";
+    // res.writeHead(200,{"Content-Type" : "text/html"})
     // res.end(JSON.stringify(superhero))
-    let  html = fs.readFileSync('./index.html',"utf-8")
-    html = html.replace("{{Name}}",name)
+    // let  html = fs.readFileSync('./index.html',"utf-8")
+    // html = html.replace("{{Name}}",name)
     // fs.createReadStream(__dirname + './index.html').pipe(res)
-    res.end(html)
+    res.end(req.url)
     // console.log(req)
 })
 
