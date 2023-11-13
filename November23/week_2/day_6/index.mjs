@@ -24,4 +24,4 @@ promt([{
 }]).then((answers) =>{
     const pokemon =answers.pokemon
     printFiveMoves(pokemon);
-})
+});
