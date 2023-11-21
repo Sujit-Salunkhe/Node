@@ -18,6 +18,6 @@
 
 const { nextTick } = require("process")
 
-// console.log('console log 2')
+console.log('console log 2')
 Promise.resolve().then(() => console.log("this promise resolve.next 1"))
 process.nextTick(() => nextTick(() => console.log('this is process .nextTick 1')))
