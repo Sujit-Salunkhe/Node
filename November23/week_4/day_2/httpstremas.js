@@ -1,6 +1,6 @@
 const http = require('http')
 const fs = require('fs')
-const { error } = require('console')
+// const { error } = require('console')
 http.createServer((req,res) => {
     // const text = fs.readFileSync('./bigfile.txt','utf-8')
     // res.end(text)
