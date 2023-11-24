@@ -67,19 +67,43 @@
                 
 //second example of express js.
 
-const express = require('express');
-const app = express()
-const path = require('path')
-// setup static and middleware
-app.use(express.static('./public'))
-app.get('/',(req,res)=>{
-    // res.status().send()
-    res.sendFile(path.resolve(__dirname,'./navbar-app/index.html'))
-});
-app.all('*',(req,res) => {
-    res.status(404).send('Resource not found')
-});
-app.listen(3000,()=>{
-    console.log('server is listing on port 3000')
-});
+// const express = require('express');
+// const app = express()
+// const path = require('path')
+// // setup static and middleware
+// app.use(express.static('./public'))
+// app.get('/',(req,res)=>{
+//     // res.status().send()
+//     res.sendFile(path.resolve(__dirname,'./navbar-app/index.html'))
+// });
+// app.all('*',(req,res) => {
+//     res.status(404).send('Resource not found')
+// });
+// app.listen(3000,()=>{
+//     console.log('server is listing on port 3000')
+// });
 
+// advance express concepts
+const express = require("express")
+const app = express()
+app.get('/',(req,res) => {
+    res.send('<h1>Home page</h1><a href = "/api/products">Products</a>')
+})
+app.listen(3000,() =>{
+    console.log("server is running on port 3000")
+})
+app.get('/api/products',(req,res) =>{
+    res.json([{name:'sujit'},{lname:'salunkhe'},{mname:'yuvraj'}])
+})
+app.get('/api/products/:productId',(req,res) =>{
+    const {productId} = req.params
+    const singleproduct = products.find((product) => product.id === Number(productId))
+    res.json(singleproduct)
+    if(!singleproduct){
+        return res.status(404).send("Product Does not Exist")
+    }
+})
+app.get('/api/products/:productId/reviews/:reviewId',(req,res) =>{{
+    res.end('hello world')
+}
+})
