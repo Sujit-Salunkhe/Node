@@ -107,3 +107,23 @@ app.get('/api/products/:productId/reviews/:reviewId',(req,res) =>{{
     res.end('hello world')
 }
 })
+
+// lerning request params and query
+app.get('/api/v1/query',(req,res) => {
+    console.log(req.query);
+    const {search,limit} = req.query
+    let sortedProducts = [...products]
+    if (search){
+        sortedProducts.filter(products => {
+            return products.name.startsWith(search)
+        })
+    }
+    if (limit){
+        sortedProducts.slice(0,Number(limit))
+    }
+    if(sortedProducts < 1){
+        res.status(200).send("no products matched to your request")
+    }
+    res.status(200).json(sortedProducts)
+    res.send('hello world')
+})
