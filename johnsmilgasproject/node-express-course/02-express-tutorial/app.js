@@ -49,22 +49,21 @@
 // const app = express()
 // home page
 // app.get("/",(req,res)=> {
-    //     console.log("user hit the resourcces")
-    //     res.status(200).send('Home page')
-    // })
-    // home about
-    // app.get("/about",(req,res)=> {
-        //     res.status(200).send('about page')
-        // })
-        // for error
-        // app.all('*',(req,res)=>{
-            //     res.status(404).send('<h1>Resource not found</h1>')
-            // })
-            // app.listen(3000,()=>{
-                //     console.log('server is listing on port 3000')
-                // }) 
+//     console.log("user hit the resourcces")
+//     res.status(200).send('Home page')
+// })
+// home about
+// app.get("/about",(req,res)=> {
+//     res.status(200).send('about page')
+// })
+// for error
+// app.all('*',(req,res)=>{
+//     res.status(404).send('<h1>Resource not found</h1>')
+// })
+// app.listen(3000,()=>{
+//     console.log('server is listing on port 3000')
+// })
 
-                
 // second example of express js.
 
 // const express = require('express');
@@ -181,13 +180,35 @@
 // })
 
 // using other https mehtods
-const express = require('express')
-const app = express()
-let {people} = require('./data')
+const express = require("express");
+const app = express();
+let { people } = require("./data");
+// static assets
+app.use(express.static("./methods-public"));
+app.use(express.urlencoded({ extended: false }));
+// parse json
+app.use(express.json());
+app.get("/api/people", (req, res) => {
+  res.status(200).json({ success: true, data: people });
+});
 
-app.get('/api/people',(req,res) =>{
-    res.status(200).json({success:true,data:people})
-})
-app.listen(3000,() =>{
-    console.log('app is running at port 3000....')
-})
+app.post("/api/people", (req, res) => {
+  const {name} = req.body;
+  if(!name){
+    return res.status(400).json({success:false,msg:'please provide name value'})
+  }
+  res.status(201).json({success:true,person:name})
+});
+// parse form data
+app.post("/login", (req, res) => {
+  const { name } = req.body;
+  if (name) {
+    return res.status(200).send(`Welcome ${name}`);
+  }
+
+  console.log(req.body);
+  res.status(404).send("Please provide name");
+});
+app.listen(3000, () => {
+  console.log("app is running at port 3000....");
+});
