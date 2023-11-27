@@ -65,7 +65,7 @@
                 // }) 
 
                 
-//second example of express js.
+// second example of express js.
 
 // const express = require('express');
 // const app = express()
@@ -84,46 +84,110 @@
 // });
 
 // advance express concepts
-const express = require("express")
+// const express = require("express")
+// const app = express()
+// app.get('/',(req,res) => {
+//     res.send('<h1>Home page</h1><a href = "/api/products">Products</a>')
+// })
+// app.listen(3000,() =>{
+//     console.log("server is running on port 3000")
+// })
+// app.get('/api/products',(req,res) =>{
+//     res.json([{name:'sujit'},{lname:'salunkhe'},{mname:'yuvraj'}])
+// })
+// app.get('/api/products/:productId',(req,res) =>{
+//     const {productId} = req.params
+//     const singleproduct = products.find((product) => product.id === Number(productId))
+//     res.json(singleproduct)
+//     if(!singleproduct){
+//         return res.status(404).send("Product Does not Exist")
+//     }
+// })
+// app.get('/api/products/:productId/reviews/:reviewId',(req,res) =>{{
+//     res.end('hello world')
+// }
+// })
+
+// // lerning request params and query
+// app.get('/api/v1/query',(req,res) => {
+//     console.log(req.query);
+//     const {search,limit} = req.query
+//     let sortedProducts = [...products]
+//     if (search){
+//         sortedProducts.filter(products => {
+//             return products.name.startsWith(search)
+//         })
+//     }
+//     if (limit){
+//         sortedProducts.slice(0,Number(limit))
+//     }
+//     if(sortedProducts < 1){
+
+//         res.status(200).send("no products matched to your request")
+//         return res.status(200).json({success:true,data:[]})
+//     }
+//     res.status(200).json(sortedProducts)
+//     res.send('hello world')
+// })
+// learning new middele wares
+// const express = require('express')
+// const app = express()
+
+// const logger = require('./logger.js')
+// const authorize = require('./authorise.js')
+// app.use([logger,authorize])
+
+// app.get('/',logger,(req,res)=>{
+//     res.send("Home Page")
+// })
+// app.get('/about',logger,(req,res)=>{
+//         res.send("About Page")
+// })
+// app.get('/api/product',logger,(req,res)=>{
+//         res.send("Product Page")
+// })
+// app.get('/api/items',[logger,authorize],(req,res)=>{
+//     console.log(req.user)
+//     res.send("Itmes page")
+// })
+// app.listen(3000,() =>{
+//     console.log('app is running at port 3000....')
+// })
+// using morgan middleware``
+// const express = require('express')
+// const app = express()
+// const morgan = require('morgan')
+
+// const logger = require('./logger.js')
+// const authorize = require('./authorise.js')
+// app.use([logger,authorize])
+// app.use(morgan('tiny'))
+
+// app.get('/',logger,(req,res)=>{
+//     res.send("Home Page")
+// })
+// app.get('/about',logger,(req,res)=>{
+//         res.send("About Page")
+// })
+// app.get('/api/product',logger,(req,res)=>{
+//         res.send("Product Page")
+// })
+// app.get('/api/items',(req,res)=>{
+//     console.log(req.user)
+//     res.send("Itmes page")
+// })
+// app.listen(3000,() =>{
+//     console.log('app is running at port 3000....')
+// })
+
+// using other https mehtods
+const express = require('express')
 const app = express()
-app.get('/',(req,res) => {
-    res.send('<h1>Home page</h1><a href = "/api/products">Products</a>')
+let {people} = require('./data')
+
+app.get('/api/people',(req,res) =>{
+    res.status(200).json({success:true,data:people})
 })
 app.listen(3000,() =>{
-    console.log("server is running on port 3000")
-})
-app.get('/api/products',(req,res) =>{
-    res.json([{name:'sujit'},{lname:'salunkhe'},{mname:'yuvraj'}])
-})
-app.get('/api/products/:productId',(req,res) =>{
-    const {productId} = req.params
-    const singleproduct = products.find((product) => product.id === Number(productId))
-    res.json(singleproduct)
-    if(!singleproduct){
-        return res.status(404).send("Product Does not Exist")
-    }
-})
-app.get('/api/products/:productId/reviews/:reviewId',(req,res) =>{{
-    res.end('hello world')
-}
-})
-
-// lerning request params and query
-app.get('/api/v1/query',(req,res) => {
-    console.log(req.query);
-    const {search,limit} = req.query
-    let sortedProducts = [...products]
-    if (search){
-        sortedProducts.filter(products => {
-            return products.name.startsWith(search)
-        })
-    }
-    if (limit){
-        sortedProducts.slice(0,Number(limit))
-    }
-    if(sortedProducts < 1){
-        res.status(200).send("no products matched to your request")
-    }
-    res.status(200).json(sortedProducts)
-    res.send('hello world')
+    console.log('app is running at port 3000....')
 })
