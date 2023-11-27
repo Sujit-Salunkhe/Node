@@ -189,7 +189,7 @@ app.use(express.urlencoded({ extended: false }));
 // parse json
 app.use(express.json());
 app.get("/api/people", (req, res) => {
-  res.status(200).json({ success: true, data: people });
+  res.status(200).json({ success: true, data: people,chekc:'sujit' });
 });
 
 app.post("/api/people", (req, res) => {
@@ -199,16 +199,32 @@ app.post("/api/people", (req, res) => {
   }
   res.status(201).json({success:true,person:name})
 });
+
+app.post('/api/postman/people',(req,res) =>{
+    const {name} = req.body;
+    if(!name){
+        return res.status(400).json({success:false,msg:'please provide your name'})
+    }
+    res.status(201).json({success:true,person:[...people,name]})
+    })
 // parse form data
 app.post("/login", (req, res) => {
   const { name } = req.body;
   if (name) {
     return res.status(200).send(`Welcome ${name}`);
   }
-
   console.log(req.body);
   res.status(404).send("Please provide name");
 });
+
+app.put('/api/people/:id',(req,res) =>{
+    const {id} = req.params
+    const {name} = req.body
+    res.send("Your a king")
+    console.log(id,name)
+})
+
+
 app.listen(3000, () => {
   console.log("app is running at port 3000....");
 });
