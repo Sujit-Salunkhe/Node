@@ -183,25 +183,16 @@
 const express = require("express");
 const app = express();
 const people  = require('./routes/people')
+const login  = require('./routes/auth')
 
 // static assets
 app.use(express.static("./methods-public"));
 app.use(express.urlencoded({ extended: false }));
 // parse json
 app.use(express.json());
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something went wrong!');
-});
+app.use('/login',login)
 app.use('/api/people',people)
-app.post("/login", (req, res) => {
-  const { name } = req.body;
-  if (name) {
-    return res.status(200).send(`Welcome ${name}`);
-  }
-  // console.log(req.body);
-  res.status(404).send("Please provide name");
-});
+
 
 app.listen(3000, () => {
   console.log("app is running at port 3000....");
