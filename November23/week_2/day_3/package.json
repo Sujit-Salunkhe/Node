@@ -1,0 +1,10 @@
+{
+  "name": "greet-codevolution",
+  "version": "1.0.0",
+  "description": "sujit's greeting package",
+  "keywords": [
+    "codevolution",
+    "greet"
+  ],
+  "main": "index.js"
+}
