@@ -13,9 +13,20 @@
 // console.log(path.join(__dirname,'index.js'))
 // console.log(path.resolve('/folder1','folder2','folder3','index.js'))
 // console.log(path.resolve('/folder1','//folder2','folder3','index.js'))
-const EventEmitters = require('node:events')
-const emmiter = new EventEmitters()
-emmiter.on('order-pizza',() => {
-    console.log(`Order Received! Baking a Pizza`)
+// emmiter.on('order-pizza',() => {
+    //     console.log(`Order Received! Baking a Pizza`)
+    // })
+    // emmiter.emit('order-pizza')
+
+// const emmiter = new EventEmitters()
+const pizzShop = require('./pizza.js')
+const DrinkMachine = require('./drink-machine.js')
+const pizzaShop = new pizzShop()
+const drinkMachine = new DrinkMachine()
+pizzaShop.on('order',(size,topping) => {
+    console.log(`Order Received! Baking a ${size} pizza with ${topping}`);
+    drinkMachine.serveDrink(size);
 })
-emmiter.emit('order-pizza')
+pizzaShop.order('large','mashroom')
+
+pizzaShop.displayOrderNumber()
