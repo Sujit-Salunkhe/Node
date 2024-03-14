@@ -1,6 +1,13 @@
-const mongoose = require('mongoose')
-const User = require('./User')
+const mongoose = require("mongoose");
+const User = require("./model/user");
 
-mongoose.connect('mongodb://localhost/testdb')
+mongoose.connect("mongodb://localhost/sujitdb");
 
-User.
+async function run() {
+  const user = User.findOne({name:'Sasuke'})
+  console.log(user)
+//   user.sayHi()
+
+}
+
+run();
